@@ -7,6 +7,5 @@ for fastq in $(ls $path/*hek*)
 do 
 
 scp ljorquera@marvin.s.upf.edu:$path /Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
-
 done
 
