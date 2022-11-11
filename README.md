@@ -1,2 +1,2 @@
 # NGS_analysis
-Analysis of NGS data from gene editing experiments performed with PE system and variants 
+Quick nalysis of NGS data from gene editing experiments performed with PE system and variants. The code is written is `bash` and it is aimed at finding specific editing through pattern matching ( `grep` ). Data are stored in `Marvin` cluster. For a more complex analysis (like NHEJ detection), I often use [CRISPResso2](http://crispresso2.pinellolab.org/submission) and [CRISPR-A](https://synbio.upf.edu/crispr-a/).
