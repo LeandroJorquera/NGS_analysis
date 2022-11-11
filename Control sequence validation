@@ -1,24 +1,22 @@
 #!/bin/bash
 
 #add path where data are stored
-path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq-data-GWRIII
 
-#create assocative array
-declare -A output
-
-for fastq in $(ls $path/*hek-c*)
+for fastq in $(ls $path/GWR-TEST-III-1_S22_L001_R1_001.fastq.gz)
 do
 
 # Print the number of reads (lines that match @, only first line in fastq format)
 total=$(zgrep -i "@" $fastq | wc -l)
-echo "Number of reads is" $total 
+echo "Number of reads is" $total
 
-# define WT sequence; wc -w for counting the number of matches (w: word, every read is a single word) 
+# define WT sequence; wc -w for counting the number of matches (w: word, every read is a single word)
 WT=$(zgrep -i "GAAGGGCTCCCAT" $fastq | wc -w)
 echo "Number of WT reads is" $WT
 
 # define the percentage of reads WT
 percent=$(echo "scale=3 ;($WT / ($total))*100" | bc)
-echo  "Pertecentage of WT reads in $(basename $fastq) is" $percent
+# print percentage
+echo  "Percentage of WT reads in $(basename $fastq) is" $percent
 
 done
