@@ -1,21 +1,24 @@
 #!/bin/bash
 
 #add path where data are stored
-path=/Users/leandrojorqueravalero/Desktop/PhD/Retroelement_engineering/RT_exploration/Miseq-data-GWRIII
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
 
 #create assocative array
 declare -A output
 
-for fastq in $(ls $path/GWR-TEST-III-{1,2,3,4,5,6,7,8,9,10}_*R1*)
-
+for fastq in $(ls $path/*hek-c*)
 do
-# define WT sequence; zgrep for looking for seq, wc -w for counting the number of matches 
-WT=$(zgrep -i GAAGGGCTCCCAT $fastq | wc -w)
-echo $WT
-# number of lines that DO NOT match the pattern (supposed WT)
-variant =$(zgrep --invert-match "GAAGTGCTCCCAT" $fastq | wc -w)
-#echo $variant
-# define the percentage of reads with variants
-percent=$(echo "scale=3 ;($variant / ($WT + $variant))*100 " | bc)
-# print percentage
-echo  $(basename $fastq)    $percent
+
+# Print the number of reads (lines that match @, only first line in fastq format)
+total=$(zgrep -i "@" $fastq | wc -l)
+echo "Number of reads is" $total 
+
+# define WT sequence; wc -w for counting the number of matches (w: word, every read is a single word) 
+WT=$(zgrep -i "GAAGGGCTCCCAT" $fastq | wc -w)
+echo "Number of WT reads is" $WT
+
+# define the percentage of reads WT
+percent=$(echo "scale=3 ;($WT / ($total))*100" | bc)
+echo  "Pertecentage of WT reads in $(basename $fastq) is" $percent
+
+done
