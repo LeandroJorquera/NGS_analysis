@@ -3,22 +3,39 @@
 path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
 
 #define loop for files QC
-for fastq $(ls $path)
+for fastq in $(ls $path/hek-*R1*)
 do
 
 fastqc $fastq
-
 done
-mkdir fastqc_files
 
-#Creating multiqc report from fastqc output (fastqc.zip files) previously saved in a folder
-#moving .zip files to new directory
-for *.zip in $path
+#create folder to store fastqc results and move it to path (we are in NGS code folder) 
+cd $path
+mkdir fastqc_output
+
+#moving .zip files to new directory previously created(fastqc_output)
+for file in $(ls $path/*.zip*)
 do
 
-mv *.zip fastc_files
-
+mv $file $path/fastqc_output
 done
 
-multiqc $(ls fastqc_files)
+cd $path/fastqc_output
 
+#with multiqc . we scan the whole directory
+multiqc .
+
+#remove .zip files from fastqc_output directory after multiQC
+for zip in $(ls $path/fastqc_output/*.zip*)
+do
+
+rm $zip
+done
+
+#remove .html files from each fastqc created in parent directory 
+ 
+for html in $(ls $path/*fastqc.html)
+do
+
+rm $html
+done
