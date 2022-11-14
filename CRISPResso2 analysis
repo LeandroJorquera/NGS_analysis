@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#add path where data are stored
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
+
+#Get names from all files in the folder into a file
+for fastq in $(ls $path)
+do
+echo $fastq > $path/batch_file.txt
+
+#Add a new columnn to the file containing the sample ID
+cd $path
+for fastq in $for fastq in $(ls $path)
+do
+echo `basename "$fastq"` >> batch_file.txt
