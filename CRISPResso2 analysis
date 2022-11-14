@@ -1,15 +1,19 @@
 #!/bin/bash
-
+   
 #add path where data are stored
 path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
+   
+#Get names from all fastq files in the folder into a file (batch)
+ls $path | grep hek > seqs_file.txt
+#open seqs_file.txt
+#Get abbreviated names in another file (ID)
+cut -b -5 seqs_file.txt > ID.txt #(extract first characters from seq name)
+#Join both files and add header
+paste seqs_file.txt ID.txt | column -s $'\t' -t > batch_file.txt
+#open batch_file.txt
+echo -e 'name  fastqr1' > batchInput && cat batch_file.txt >> batchInput
+rm seqs_file.txt ID.txt batch_file.txt
+open batchInput
 
-#Get names from all files in the folder into a file
-for fastq in $(ls $path)
-do
-echo $fastq > $path/batch_file.txt
-
-#Add a new columnn to the file containing the sample ID
-cd $path
-for fastq in $for fastq in $(ls $path)
-do
-echo `basename "$fastq"` >> batch_file.txt
+#Run CRISPResso2 with input batch file
+CRISPRessoBatch --batch_settings batchInput --amplicon_seq CGGAGGACAAAGTACAAACGGCAGAAGCTGGAGGAGGAAGGGCCTGAGTCCGAGCAGAAGAAGAAGGGCTCCCATCACATCAACCGGTGGCGCATTGCCACGAAGCAGGCCAATGGGGAGGACATCGATGTCACCTCCAATGACTAGGGTGGGCAACCACAAACCCACGAGGGCAGAGTGCTGCTTGCTGCTGGCCAGGCCCCTGCGTGGGCCCAAGCTGGACTCTGGCCACT --prime_editing_pegRNA_spacer_seq GAGTCCGAGCAGAAGAAGAA --prime_editing_pegRNA_extension_seq GTGATGGGAGCaCTTCTTCTTCTGCTCGGA --prime_editing_pegRNA_scaffold_seq GTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGC
