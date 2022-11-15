@@ -19,7 +19,8 @@ percent=$(echo "scale=3 ;($WT / ($total))*100" | bc)
 echo  "Percentage of WT reads in $(basename $fastq) is" $percent
 
 #calculate the number of reads that contains the edit (spontaneusly)
-for fastq in $(ls $path/GWR-TEST-III-1_S22_L001_R1_001.fastq.gz)
-do
 spon=$(zgrep -i "GAAGtGCTCCCATCAC" $fastq | wc -w)
   echo "Number of spontaneusly edited reads is" $spon
+
+done
+
