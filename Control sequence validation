@@ -3,10 +3,9 @@
 #add path where data are stored
 path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq-data-GWRIII
 
+# Print the number of reads (lines that match @, only first line in fastq format)
 for fastq in $(ls $path/GWR-TEST-III-1_S22_L001_R1_001.fastq.gz)
 do
-
-# Print the number of reads (lines that match @, only first line in fastq format)
 total=$(zgrep -i "@" $fastq | wc -l)
 echo "Number of reads is" $total
 
@@ -19,4 +18,8 @@ percent=$(echo "scale=3 ;($WT / ($total))*100" | bc)
 # print percentage
 echo  "Percentage of WT reads in $(basename $fastq) is" $percent
 
-done
+#calculate the number of reads that contains the edit (spontaneusly)
+for fastq in $(ls $path/GWR-TEST-III-1_S22_L001_R1_001.fastq.gz)
+do
+spon=$(zgrep -i "GAAGtGCTCCCATCAC" $fastq | wc -w)
+  echo "Number of spontaneusly edited reads is" $spon
