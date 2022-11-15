@@ -1,26 +1,36 @@
 #!/bin/bash
 #add path where data are stored
 path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
+
 #create assocative array
 declare -A output
 
+# Calculate the number of reads containing the edited sequence in the control sample
+for fastq in $(ls $path/hek-c*)
+do
+spont=$(zgrep -i GAAGtGCTCCCAT $fastq | wc -w)
+        #echo $spont
+
+# Total number of reads and reads containing the edit in each sample
 for fastq in $(ls $path/*hek*)
 do
-#Number of reads in the file
 total=$(zgrep -i "@" $fastq | wc -l)
   #echo "Number of reads is" $total
-# Reads that contain edited sequence
-edited=$(zgrep -i GAAGtGCTCCCAT $fastq | wc -w)
-        #echo $edited
+edited=$(zgrep -i GAAGtGCTCCCAT $fastq - $spont | wc -w)
+        echo $edited > edited_reads.txt
 # define the percentage of edited sequences and open calculate with bc mode
-efficiency=$(echo "scale=3 ;(($edited - 64) / $total)*100 " | bc)
+efficiency=$(echo "scale=3 ;(($edited - $spont) / $total)*100 " | bc)
         #echo  $(basename $fastq)    $efficiency
+
 #include the results into the array
 output[$(basename $fastq)]=$efficiency
 done
+
 #loop for printing array
 for key in "${!output[@]}"; do echo $key ' - ' ${output["$key"]} 
-done | sort -rn -k3 > optimization_ouput.txt
+done | sort -rn -k3 > editing_ouput.txt
+
 #moving file to path directory 
-mv optimization_ouput.txt $path
-open $path/optimization_ouput.txt
+mv editing_output.txt $path
+open $path/editing_output.txt
+
