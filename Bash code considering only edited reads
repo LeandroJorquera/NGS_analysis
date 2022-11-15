@@ -14,10 +14,10 @@ spont=$(zgrep -i GAAGtGCTCCCAT $fastq | wc -w)
 # Total number of reads and reads containing the edit in each sample
 for fastq in $(ls $path/*hek*)
 do
-total=$(zgrep -i "@" $fastq | wc -l)
+total=$(zgrep -p '^@' $fastq | wc -l)
   #echo "Number of reads is" $total
 edited=$(zgrep -i GAAGtGCTCCCAT $fastq - $spont | wc -w)
-        echo $edited > edited_reads.txt
+        #echo $edited > edited_reads.txt
 # define the percentage of edited sequences and open calculate with bc mode
 efficiency=$(echo "scale=3 ;(($edited - $spont) / $total)*100 " | bc)
         #echo  $(basename $fastq)    $efficiency
