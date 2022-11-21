@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#add path where data are stored in Marvin (changes every time)
+path=/scratch/lab_mguell/projects/shared_data/SeqData/miseq/2022-11-08/221108_M00724_0058_000000000-GDV4H
+
+for fastq in $(ls $path/*hek*)
+do 
+
+scp ljorquera@marvin.s.upf.edu:$path /Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
+done
+
