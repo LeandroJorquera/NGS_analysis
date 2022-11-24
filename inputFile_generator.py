@@ -29,7 +29,7 @@ df.columns = ['name','fastq_r1']
 #--saving the file (directory where singularity is run)
 df.to_csv("input_file", sep="\t", index=False)
 =======
-print(df)
+#print(df)
 #--saving the file
 df.to_csv("input_file", sep="\t", index=False)
 
