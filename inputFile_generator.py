@@ -2,8 +2,10 @@ import os
 import pandas as pd
 import numpy as np
 import re
-#-- path where reads are stored
-path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization"
+
+#-- path where reads are in my marvin folder
+path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
+
 #-- loop for creating file names and abbreviations
 header = ['name','fastq_r1']
 list_fastq = []
@@ -16,14 +18,20 @@ for file in os.listdir(path):
         list_name.append(short)
 #print(list_name)
 #print(list_ID)
+
 #--turning results into dataframe
 dict = {'name':list_name,'fastq_r1':list_fastq}
 df = pd.DataFrame(dict)
 df.columns = ['name','fastq_r1']
+
+#print(df)
+
+#--saving the file (directory where singularity is run)
+df.to_csv("input_file", sep="\t", index=False)
+
 #print(df)
 #--saving the file
 df.to_csv("input_file", sep="\t", index=False)
-
 
 
 
