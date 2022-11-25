@@ -23,13 +23,8 @@ for file in os.listdir(path):
 dict = {'name':list_name,'fastq_r1':list_fastq}
 df = pd.DataFrame(dict)
 df.columns = ['name','fastq_r1']
-
 #print(df)
 
-#--saving the file (directory where singularity is run)
-df.to_csv("input_file", sep="\t", index=False)
-
-#print(df)
 #--saving the file
 df.to_csv("input_file", sep="\t", index=False)
 
