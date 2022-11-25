@@ -4,10 +4,7 @@
 
 # generating input file from fastq data
 module load Python/3.8.6-GCCcore-10.2.0
-python3 inputFile_generator.py
-
-# moving input_file to data folder
-#mv input_file /homes/users/ljorquera/scratch/data/Miseq_optimization
+python3 /homes/users/ljorquera/scratch/code/NGS_analysis/inputFile_generator.py
 
 # load CRISPResso singularity and add settings for run 
-singularity run -v ${PWD}:/DATA -w /DATA /scratch/lab_mguell/shared_data/CRISPResso2/crispresso2.sif CRISPRessoBatch --batch_settings input_file --amplicon_seq CGGAGGACAAAGTACAAACGGCAGAAGCTGGAGGAGGAAGGGCCTGAGTCCGAGCAGAAGAAGAAGGGCTCCCATCACATCAACCGGTGGCGCATTGCCACGAAGCAGGCCAATGGGGAGGACATCGATGTCACCTCCAATGACTAGGGTGGGCAACCACAAACCCACGAGGGCAGAGTGCTGCTTGCTGCTGGCCAGGCCCCTGCGTGGGCCCAAGCTGGACTCTGGCCACT --prime_editing_pegRNA_spacer_seq GAGTCCGAGCAGAAGAAGAA --prime_editing_pegRNA_extension_seq ATGGGAGCACTTCTTCTTCTGCTCGG --prime_editing_pegRNA_scaffold_seq GTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGGACCGAGTCGGTCC -bo . 
+#singularity run -v ${PWD}:/DATA -w /DATA /scratch/lab_mguell/shared_data/CRISPResso2/crispresso2.sif CRISPRessoBatch --batch_settings input_file --amplicon_seq CGGAGGACAAAGTACAAACGGCAGAAGCTGGAGGAGGAAGGGCCTGAGTCCGAGCAGAAGAAGAAGGGCTCCCATCACATCAACCGGTGGCGCATTGCCACGAAGCAGGCCAATGGGGAGGACATCGATGTCACCTCCAATGACTAGGGTGGGCAACCACAAACCCACGAGGGCAGAGTGCTGCTTGCTGCTGGCCAGGCCCCTGCGTGGGCCCAAGCTGGACTCTGGCCACT --prime_editing_pegRNA_spacer_seq GAGTCCGAGCAGAAGAAGAA --prime_editing_pegRNA_extension_seq ATGGGAGCACTTCTTCTTCTGCTCGG --prime_editing_pegRNA_scaffold_seq GTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGGACCGAGTCGGTCC -bo . 
