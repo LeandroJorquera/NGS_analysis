@@ -1,0 +1,38 @@
+
+# -- Parameters for CRISPR-A use -- #
+
+params {
+        outDir = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
+        input = "/homes/users/ljorquera/scratch/data/Miseq_optimization/*_{R1,R2}*.fastq*"
+        r2file = true
+        inSize = -1
+        umiClustering = false
+        umiType = "TV"
+        minlen = 55
+        maxlen = 57
+        id = 0.99
+        ubs = 1
+        error = 0.2
+        simGE = false
+        simGEfilesPath = "./bin/SimGE"
+        simGEid = "sample_0"
+        simGEsequence = ""
+        cutSite = ""
+        referenceFasta = "./Testing-example/References/*"
+        indexHuman = "./Genomes/Human"
+        indexMouse = "./Genomes/Mouse"
+        refOrganism = [["sample_0", "other"]]
+        gRNAseq = [["sample_0", "GGGGCCACTAGGGACAGGAT"]]
+        selfRef = [["sample_0", false ]]
+        aligner = "minimap2"
+        template_seq = "./Testing-example/Template-hdr/*"
+        mock = false
+        template = false
+        spike = "no"
+        samplesNames_file = "samples.php" 
+        protCutSite = [["sample_0", -3 ]]
+}
+process.container = 'msanvicente/crisprgareq'
+docker.enabled = false
+singularity.enabled = true
+singularity.autoMounts = true
