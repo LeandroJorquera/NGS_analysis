@@ -2,12 +2,26 @@ import os
 import re
 import configparser
 
+#-- VARIABLES TO CHANGE
+input_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
+output_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
+amplicon_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/*emx1*"
+
+#-- Loop for generating multisample lists
+list_name = []
+for file in os.listdir(input_path):
+    if file.endswith(".fastq.gz"):
+        short = re.split("[_S]",file)[0]
+        list_name.append(short)
+print(list_name)
+
+
 #--Create config object and pass it to 'config'
 config = configparser.ConfigParser()
 #--Add structure to the config file we will create
 config.add_section('input/output')
-config.set('input/output','outDir','"/homes/users/ljorquera/scratch/data/Miseq_optimization"')
-config.set('input/output','input','"/homes/users/ljorquera/scratch/data/Miseq_optimization/*_{R1,R2}*.fastq*"')
+config.set('input/output','outDir',f"{output_path!r}")
+config.set('input/output','input',f"{input_path!r}")
 #---
 config.add_section('settings')
 config.set('settings','r2file','true')
@@ -30,7 +44,7 @@ config.set('settings','template','false')
 config.set('settings','spike','"no"')
 #---
 config.add_section('seqs')
-config.set('seqs','referenceFasta','"./Testing-example/References/*"') # add path for fasta sequence of the amplicon
+config.set('seqs','referenceFasta',f"{amplicon_path!r}") # add path for fasta sequence of the amplicon
 config.set('seqs','indexHuman','"./Genomes/Human"') # path for human genome sequence location
 config.set('seqs','indexMouse','"./Genomes/Mouse"') # path for mouse genome sequence location
 config.set('seqs','refOrganism','[["sample_0", "other"]]') # add reference organism for each sample
@@ -47,8 +61,8 @@ config.set('docker_settings','singularity.enabled','true')
 config.set('docker_settings','singularity.autoMounts','true')
 
 #--Write the out config file
-with open("/Users/leandrojorqueravalero/PycharmProjects/pythonProject/NGS_analysis/crisprA.config", 'w') as configfile:
-    config.write(configfile)
+#with open("/Users/leandrojorqueravalero/PycharmProjects/pythonProject/NGS_analysis/crisprA.config", 'w') as configfile:
+    #config.write(configfile)
 
 
 
