@@ -3,11 +3,9 @@ import pandas as pd
 import numpy as np
 import re
 
-#-- path where reads are in my marvin folder
-path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
-
+#-- path where reads are stored
+path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization"
 #-- loop for creating file names and abbreviations
-header = ['name','fastq_r1']
 list_fastq = []
 list_name = []
 for file in os.listdir(path):
@@ -20,13 +18,14 @@ for file in os.listdir(path):
 #print(list_ID)
 
 #--turning results into dataframe
-dict = {'name':list_name,'fastq_r1':list_fastq}
-df = pd.DataFrame(dict)
-df.columns = ['name','fastq_r1']
+print(list_name)
+#dict = {'name':list_name,'fastq_r1':list_fastq}
+#df = pd.DataFrame(dict)
+#df.columns = ['name','fastq_r1']
 #print(df)
 
 #--saving the file
-df.to_csv("input_file", sep="\t", index=False)
+#df.to_csv("input_file", sep="\t", index=False)
 
 
 
