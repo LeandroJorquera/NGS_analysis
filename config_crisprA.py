@@ -6,18 +6,40 @@ import configparser
 input_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
 output_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
 amplicon_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/*emx1*"
+gRNA_seq = "GAGTCCGAGCAGAAGAAGAA"
+selRef = 'false'
+template_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/template_pegguide_exmGtoT.fasta"
+protCutSite = -3
 
 #-- Loop for generating multisample lists
-list_name = []
+sample_name = []
+gRNA_list = []
+selfRef_list = []
+cutsite_list = []
+# Generating shorted file names
 for file in os.listdir(input_path):
     if file.endswith(".fastq.gz"):
         short = re.split("[_S]",file)[0]
-        list_name.append(short)
-print(list_name)
-
+        sample_name.append(short)
+# Make a list from every element in sample_name and different sequences given above
+for i in sample_name:
+    gRNA_list.append([i])
+    selfRef_list.append([i])
+    cutsite_list.append([i])
+for i in gRNA_list:
+    i.append(gRNA_seq)
+#print(gRNA_list)
+for i in selfRef_list:
+    i.append(selRef)
+#print(selfRef_list)
+for i in cutsite_list:
+    i.append(protCutSite)
+#print(cutsite_list)
 
 #--Create config object and pass it to 'config'
 config = configparser.ConfigParser()
+#-- Make name case sensitive
+config.optionxform = str
 #--Add structure to the config file we will create
 config.add_section('input/output')
 config.set('input/output','outDir',f"{output_path!r}")
@@ -48,11 +70,11 @@ config.set('seqs','referenceFasta',f"{amplicon_path!r}") # add path for fasta se
 config.set('seqs','indexHuman','"./Genomes/Human"') # path for human genome sequence location
 config.set('seqs','indexMouse','"./Genomes/Mouse"') # path for mouse genome sequence location
 config.set('seqs','refOrganism','[["sample_0", "other"]]') # add reference organism for each sample
-config.set('seqs','gRNAseq','[["sample_0", "GGGGCCACTAGGGACAGGAT"]]') # add gRNA sequence for each sample
-config.set('seqs','selfRef','[["sample_0", false ]]') #
-config.set('seqs','template_seq','"./Testing-example/Template-hdr/*"') # add template seq (or desired edit in PE) for each sample
+config.set('seqs','gRNAseq',f"{gRNA_list}") # add gRNA sequence for each sample
+config.set('seqs','selfRef',f"{selfRef_list}") #
+config.set('seqs','template_seq',f"{template_path!r}") # add template seq (or desired edit in PE) for each sample
 config.set('seqs','samplesNames_file','"samples.php"') # add file with sample names
-config.set('seqs','protCutSite','[["sample_0", -3 ]]') # add protospacer cut site (-3 for Cas9) for each sample
+config.set('seqs','protCutSite',f"{cutsite_list}") # add protospacer cut site (-3 for Cas9) for each sample
 #---
 config.add_section('docker_settings')
 config.set('docker_settings','process.container','"msanvicente/crisprgareq"')
@@ -61,8 +83,8 @@ config.set('docker_settings','singularity.enabled','true')
 config.set('docker_settings','singularity.autoMounts','true')
 
 #--Write the out config file
-#with open("/Users/leandrojorqueravalero/PycharmProjects/pythonProject/NGS_analysis/crisprA.config", 'w') as configfile:
-    #config.write(configfile)
+with open("/Users/leandrojorqueravalero/PycharmProjects/pythonProject/NGS_analysis/crisprA.config", 'w') as configfile:
+    config.write(configfile)
 
 
 
