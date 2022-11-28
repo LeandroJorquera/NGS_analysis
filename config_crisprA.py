@@ -3,13 +3,13 @@ import re
 import configparser
 
 #-- VARIABLES TO CHANGE
-input_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
-output_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization/"
-amplicon_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/*emx1*"
+input_path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
+output_path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
+amplicon_path = "/homes/users/ljorquera/scratch/data/Miseq_optimization/amplicon_seqs/emx1-amplicon.fasta"
 gRNA_seq = "GAGTCCGAGCAGAAGAAGAA"
 selRef = 'false'
 refOrganism = 'Human'
-template_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/template_pegguide_exmGtoT.fasta"
+template_path = "/homes/users/ljorquera/scratch/data/Miseq_optimization/amplicon_seqs/template_pegguide_exmGtoT.fasta"
 protCutSite = -3
 
 #-- Loop for generating multisample lists
@@ -88,7 +88,7 @@ config.set('docker_settings','singularity.enabled','true')
 config.set('docker_settings','singularity.autoMounts','true')
 
 #--Write the out config file
-with open("/Users/leandrojorqueravalero/PycharmProjects/pythonProject/NGS_analysis/crisprA.config", 'w') as configfile:
+with open("/homes/users/ljorquera/scratch/code/NGS_analysis/crisprA.config", 'w') as configfile:
     config.write(configfile)
 
 
