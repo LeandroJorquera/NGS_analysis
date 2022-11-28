@@ -8,6 +8,7 @@ output_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_optimization
 amplicon_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/*emx1*"
 gRNA_seq = "GAGTCCGAGCAGAAGAAGAA"
 selRef = 'false'
+refOrganism = 'Human'
 template_path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/amplicon_seqs/template_pegguide_exmGtoT.fasta"
 protCutSite = -3
 
@@ -16,6 +17,7 @@ sample_name = []
 gRNA_list = []
 selfRef_list = []
 cutsite_list = []
+refOrganism_list = []
 # Generating shorted file names
 for file in os.listdir(input_path):
     if file.endswith(".fastq.gz"):
@@ -26,6 +28,7 @@ for i in sample_name:
     gRNA_list.append([i])
     selfRef_list.append([i])
     cutsite_list.append([i])
+    refOrganism_list.append([i])
 for i in gRNA_list:
     i.append(gRNA_seq)
 #print(gRNA_list)
@@ -35,6 +38,8 @@ for i in selfRef_list:
 for i in cutsite_list:
     i.append(protCutSite)
 #print(cutsite_list)
+for i in refOrganism_list:
+    i.append(refOrganism)
 
 #--Create config object and pass it to 'config'
 config = configparser.ConfigParser()
@@ -69,7 +74,7 @@ config.add_section('seqs')
 config.set('seqs','referenceFasta',f"{amplicon_path!r}") # add path for fasta sequence of the amplicon
 config.set('seqs','indexHuman','"./Genomes/Human"') # path for human genome sequence location
 config.set('seqs','indexMouse','"./Genomes/Mouse"') # path for mouse genome sequence location
-config.set('seqs','refOrganism','[["sample_0", "other"]]') # add reference organism for each sample
+config.set('seqs','refOrganism',f"{refOrganism_list!r}") # add reference organism for each sample
 config.set('seqs','gRNAseq',f"{gRNA_list}") # add gRNA sequence for each sample
 config.set('seqs','selfRef',f"{selfRef_list}") #
 config.set('seqs','template_seq',f"{template_path!r}") # add template seq (or desired edit in PE) for each sample
