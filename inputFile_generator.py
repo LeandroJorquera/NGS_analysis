@@ -4,14 +4,14 @@ import fnmatch
 import re
 
 #-- path where reads are in my marvin folder
-path = "/homes/users/ljorquera/scratch/data/RT_test1"
+path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_RT-test1"
 
 #-- loop for creating file names and abbreviations
 list_fastq = []
 list_fastq2 = []
 list_name = []
 
-for file in os.listdir(path/Pool-4-{6-9}*):
+for file in os.listdir(path):
     #only fastq.gz files and generate abbreviated names
     if file.endswith(".fastq.gz"):
         if fnmatch.fnmatch(file,"*R1*"):
@@ -32,10 +32,13 @@ list_fastq2.sort()
 #--Including results into dataframe
 dict = {'name':names, 'fastq_r1':list_fastq, 'fastq_r2':list_fastq2}
 df = pd.DataFrame(dict)
-print(df)
+# selecting desired rows
+df_final = df.drop([1,2,3,4], axis=0)
+#print(df)
+print(df_final)
 
 #--saving the file
-df.to_csv("input_file", sep="\t", index=False)
+df_final.to_csv("input_file", sep="\t", index=False)
 
 
 
