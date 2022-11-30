@@ -4,14 +4,14 @@ import fnmatch
 import re
 
 #-- path where reads are in my marvin folder
-path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_RT-test1"
+path = "/homes/users/ljorquera/scratch/data/RT_test1"
 
 #-- loop for creating file names and abbreviations
 list_fastq = []
 list_fastq2 = []
 list_name = []
 
-for file in os.listdir(path):
+for file in os.listdir(path/Pool-4-{6-9}*):
     #only fastq.gz files and generate abbreviated names
     if file.endswith(".fastq.gz"):
         if fnmatch.fnmatch(file,"*R1*"):
