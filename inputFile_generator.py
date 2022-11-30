@@ -1,10 +1,10 @@
 import os
 import pandas as pd
-import numpy as np
+import fnmatch
 import re
 
 #-- path where reads are in my marvin folder
-path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
+path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_RT-test1"
 
 #-- loop for creating file names and abbreviations
 list_fastq = []
@@ -14,25 +14,28 @@ list_name = []
 for file in os.listdir(path):
     #only fastq.gz files and generate abbreviated names
     if file.endswith(".fastq.gz"):
-        if filenmatch:
+        if fnmatch.fnmatch(file,"*R1*"):
             list_fastq.append(file)
-        #if file.find("R2"):
-            #list_fastq2.append(file)
-        short = re.split("[_S]",file)[0]
+        else:
+            list_fastq2.append(file)
+        short = re.split("[_S]", file)[0]
         list_name.append(short)
-print(list_name)
-print(list_fastq)
+# remove duplicates from name list and order all lists
+names = []
+for i in list_name:
+    if i not in names:
+        names.append((i))
+names.sort()
+list_fastq.sort()
+list_fastq2.sort()
 
-#--turning results into dataframe
-dict = {'name':list_name,'fastq_r1':list_fastq, 'fastq_r2':list_fastq2}
+#--Including results into dataframe
+dict = {'name':names, 'fastq_r1':list_fastq, 'fastq_r2':list_fastq2}
 df = pd.DataFrame(dict)
-df.columns = ['name','fastq_r1','fastq_r2']
-# remove duplicates
-df = df.drop_duplicates(subset ='name')
-#print(df)
+print(df)
 
 #--saving the file
-#df.to_csv("input_file", sep="\t", index=False)
+df.to_csv("input_file", sep="\t", index=False)
 
 
 
