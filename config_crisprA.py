@@ -112,5 +112,3 @@ with open("/homes/users/ljorquera/scratch/code/NGS_analysis/crisprA.config", 'w'
 
 
 
-
-
