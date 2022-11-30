@@ -4,7 +4,7 @@ import fnmatch
 import re
 
 #-- path where reads are in my marvin folder
-path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_RT-test1"
+path = "/homes/users/ljorquera/scratch/data/Miseq_optimization"
 
 #-- loop for creating file names and abbreviations
 list_fastq = []
@@ -25,17 +25,20 @@ names = []
 for i in list_name:
     if i not in names:
         names.append((i))
-names.sort()
-list_fastq.sort()
-list_fastq2.sort()
+#names.sort()
+#list_fastq.sort()
+#list_fastq2.sort()
+
+names.sort(key=lambda x: x.split("-") sum(x[0] + x[1]))
+print(names)
 
 #--Including results into dataframe
-dict = {'name':names, 'fastq_r1':list_fastq, 'fastq_r2':list_fastq2}
-df = pd.DataFrame(dict)
-print(df)
+#dict = {'name':names, 'fastq_r1':list_fastq, 'fastq_r2':list_fastq2}
+#df = pd.DataFrame(dict)
+#print(df)
 
 #--saving the file
-df.to_csv("input_file", sep="\t", index=False)
+#df.to_csv("input_file", sep="\t", index=False)
 
 
 
