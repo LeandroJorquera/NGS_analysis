@@ -4,7 +4,7 @@ import fnmatch
 import re
 
 #-- path where reads are in my marvin folder
-path = "/Users/leandrojorqueravalero/Desktop/PhD/Miseq/Miseq_RT-test1"
+path = "/homes/users/ljorquera/scratch/data/RT_test1"
 
 #-- loop for creating file names and abbreviations
 list_fastq = []
