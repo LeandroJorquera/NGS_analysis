@@ -1,25 +1,25 @@
 #!/bin/bash
 #add path where data are stored
-path=/Users/leandrojorqueravalero/Desktop/omega_DSB
+path=/homes/users/ljorquera/scratch/data/omega_DSB
 
 #create assocative array
 declare -A output
 
 # Total number of reads and reads containing the edit in each sample
-for fastq in $(ls $path/pool*R1*)
+for fastq in $(ls $path/Undetermined_S0_L001_R1_001.fastq.gz)
 do
 	total=$(zgrep -p '^@' $fastq | wc -l)
   echo "Number of reads in $fastq is" $total
 done
 
 # Calculate the number of reads containing the control sequence in each sample
-for fastq in $(ls $path/pool*R1*)
+for fastq in $(ls $path/Undetermined_S0_L001_R1_001.fastq.gz)
 do
-	control=$(zgrep -i GGAGGAGCAGGATCAGACAATGAAGGAGGTGCTGG $fastq | wc -w)
+	control=$(zgrep -i GAGCAGGATCAGACAATGAAGGAGGTG $fastq | wc -w)
          echo "number of reads in $fastq with control sequence is" $control
 done
 
 #moving file to path directory 
 #mv editing_output.txt $path
-open 
+#open 
 

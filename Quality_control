@@ -1,9 +1,9 @@
 #!/bin/bash
 #define path where fastq files are stored
-path=/Users/leandrojorqueravalero/Desktop/omega_DSB
+path=/homes/users/ljorquera/scratch/data/omega_DSB/second_try
 
 #define loop for files QC
-for fastq in $(ls $path/pool*R1*)
+for fastq in $(ls $path/Pool7-*)
 do
 
 fastqc $fastq
