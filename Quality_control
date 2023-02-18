@@ -1,9 +1,9 @@
 #!/bin/bash
 #define path where fastq files are stored
-path=/homes/users/ljorquera/scratch/data/omega_DSB/second_try
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/IsrB_DSB_test/second_try
 
 #define loop for files QC
-for fastq in $(ls $path/Pool7-*)
+for fastq in $(ls $path/Pool7*)
 do
 
 fastqc $fastq
@@ -14,7 +14,7 @@ cd $path
 mkdir fastqc_output
 
 #moving .zip files to new directory previously created(fastqc_output)
-for file in $(ls $path/*.zip*)
+for file in $(ls $path/*.zip)
 do
 
 mv $file $path/fastqc_output
