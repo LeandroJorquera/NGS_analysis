@@ -1,36 +1,36 @@
 #!/bin/bash
-#define path where fastq files are stored
-path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/IsrB_DSB_test/second_try
+#define path where fastq files are stored or execute from this folder to make it simpler
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test/RT-test3
 
 #define loop for files QC
-for fastq in $(ls $path/Pool7*)
+for fastq in $(ls ./*_R1_*)
 do
 
 fastqc $fastq
 done
 
 #create folder to store fastqc results and move it to path (we are in NGS code folder) 
-cd $path
+#cd $path
 mkdir fastqc_output
 
 #moving .zip files to new directory previously created(fastqc_output)
-for file in $(ls $path/*.zip)
+for file in $(ls ./*.zip)
 do
 
-mv $file $path/fastqc_output
+mv $file ./fastqc_output
 done
 
-cd $path/fastqc_output
+cd ./fastqc_output
 
 #with multiqc . we scan the whole directory
 multiqc .
 
 #remove .zip files from fastqc_output directory after multiQC
-for zip in $(ls $path/fastqc_output/*.zip*)
-do
+#for zip in $(ls $path/fastqc_output/*.zip*)
+#do
 
-rm $zip
-done
+#rm $zip
+#done
 
 #remove .html files from each fastqc created in parent directory 
  
