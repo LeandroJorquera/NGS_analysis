@@ -4,7 +4,7 @@
 # Merges paired-end FASTQ files using PEAR
 
 # Input and output directories
-path="/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/feb-OOF"
+path="/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/feb-INF"
 outdir="$path/merged"
 mkdir -p "$outdir"
 
