@@ -1,0 +1,6 @@
+name	fastq_r1	fastq_r2
+Pool-4-1	Pool-4-1_S23_L001_R1_001.fastq.gz	Pool-4-1_S23_L001_R2_001.fastq.gz
+Pool-4-6	Pool-4-6_S28_L001_R1_001.fastq.gz	Pool-4-6_S28_L001_R2_001.fastq.gz
+Pool-4-7	Pool-4-7_S29_L001_R1_001.fastq.gz	Pool-4-7_S29_L001_R2_001.fastq.gz
+Pool-4-8	Pool-4-8_S30_L001_R1_001.fastq.gz	Pool-4-8_S30_L001_R2_001.fastq.gz
+Pool-4-9	Pool-4-9_S31_L001_R1_001.fastq.gz	Pool-4-9_S31_L001_R2_001.fastq.gz

@@ -1,6 +1,6 @@
 #!/bin/bash
 #define path where fastq files are stored or execute from this folder to make it simpler
-path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test/RT-test3
+path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/feb-OOF/
 
 #define loop for files QC
 for fastq in $(ls ./*_R1_*)
