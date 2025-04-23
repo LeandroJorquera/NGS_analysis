@@ -1,41 +1,38 @@
 #!/bin/bash
-#define path where fastq files are stored or execute from this folder to make it simpler
-path=/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test/RT-test3
 
-#define loop for files QC
-for fastq in $(ls ./*_R1_*)
-do
+# Set the path to your FASTQ files (or use current dir)
+#path="/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/dec-INF"
 
-fastqc $fastq
+# Move into the folder with the FASTQ files
+cd "$path" || { echo "Path not found!"; exit 1; }
+
+echo "Running FastQC on R1 and R2 FASTQ files..."
+
+# Create output directory for FastQC results
+mkdir -p fastqc_output
+
+# Run FastQC on both R1 and R2 files
+for fastq in *_R1_*.fastq.gz *_R2_*.fastq.gz; do
+    if [[ -f "$fastq" ]]; then
+        echo "Processing $fastq"
+        fastqc "$fastq" --outdir=fastqc_output
+    fi
 done
 
-#create folder to store fastqc results and move it to path (we are in NGS code folder) 
-#cd $path
-mkdir fastqc_output
+# Move into the output directory
+cd fastqc_output || exit
 
-#moving .zip files to new directory previously created(fastqc_output)
-for file in $(ls ./*.zip)
-do
-
-mv $file ./fastqc_output
-done
-
-cd ./fastqc_output
-
-#with multiqc . we scan the whole directory
+echo "Generating MultiQC report..."
 multiqc .
 
-#remove .zip files from fastqc_output directory after multiQC
-#for zip in $(ls $path/fastqc_output/*.zip*)
-#do
+# Optional: Clean up FASTQC zip/html files
+cleanup=true
 
-#rm $zip
-#done
+if [ "$cleanup" = true ]; then
+    echo "Cleaning up .zip and .html files..."
+    rm -f *.zip
+    rm -f ../*fastqc.html
+fi
 
-#remove .html files from each fastqc created in parent directory 
- 
-for html in $(ls $path/*fastqc.html)
-do
+echo "✅ QC completed! MultiQC report is saved in: $PWD"
 
-rm $html
-done
