@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the path to your FASTQ files (or use current dir)
-#path="/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/dec-INF"
+path="/Users/leandro/Desktop/github/NGS-data/feb-OOF/round2/raw_data"
 
 # Move into the folder with the FASTQ files
 cd "$path" || { echo "Path not found!"; exit 1; }

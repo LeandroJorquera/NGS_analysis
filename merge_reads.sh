@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# merge_reads.sh
-# Merges paired-end FASTQ files using PEAR
+# merge_reads_bbmerge.sh
+# Merges paired-end FASTQ files using BBMerge (from BBTools)
 
 # Input and output directories
-path="/Users/leandrojorqueravalero/Desktop/PhD/Miseq/RT_test-v2/feb-INF"
+path="/Users/leandro/Desktop/github/NGS-data/feb-OOF/round2/raw_data"
 outdir="$path/merged"
 mkdir -p "$outdir"
 
@@ -14,14 +14,19 @@ do
   base=$(basename "$r1" _R1_001.fastq.gz)
   r2="$path/${base}_R2_001.fastq.gz"
 
-  echo "Merging $base with PEAR..."
+  echo "Merging $base with BBMerge..."
 
-  pear -f "$r1" -r "$r2" -o "$outdir/$base" > /dev/null
+  bbmerge.sh in1="$r1" in2="$r2" out="$outdir/${base}.merged.fastq.gz" 2>/dev/null
 
-  if [ -f "$outdir/${base}.assembled.fastq" ]; then
-    echo "✔️ Merged: ${base}.assembled.fastq"
+  if [ -f "$outdir/${base}.merged.fastq.gz" ]; then
+    echo "✔️ Merged: ${base}.merged.fastq.gz"
   else
     echo "❌ Merging failed for $base"
+  fi
+
+  echo ""
+done
+cho "❌ Merging failed for $base"
   fi
 
   echo ""
