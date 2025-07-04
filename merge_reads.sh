@@ -3,8 +3,8 @@
 # merge_reads_bbmerge.sh
 # Merges paired-end FASTQ files using BBMerge (from BBTools)
 
-# Input and output directories
-path="/Users/leandro/Desktop/github/NGS-data/feb-OOF/round2/raw_data"
+# Input and output directories -- HAVE FILES IN LOCAL, NOT CLOUD
+path='/Users/leandro/Desktop/github/NGS-data/SeV-ORF1_040725'
 outdir="$path/merged"
 mkdir -p "$outdir"
 
@@ -26,9 +26,5 @@ do
 
   echo ""
 done
-cho "❌ Merging failed for $base"
-  fi
 
-  echo ""
-done
 
