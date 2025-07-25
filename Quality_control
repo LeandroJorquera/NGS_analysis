@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the path to your FASTQ files (or use current dir)
-path='/Users/leandro/Desktop/github/NGS-data/SeV-ORF1_040725'
+path='/Users/leandro/Desktop/github/NGS-data/RTtest6-sorted/raw'
 
 # Move into the folder with the FASTQ files
 cd "$path" || { echo "Path not found!"; exit 1; }
