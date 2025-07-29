@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Path to merged FASTQ files
-path="/Users/leandro/Desktop/github/NGS-data/feb-OOF/round2/merged"
+path="/Users/leandro/Desktop/github/NGS-data/RTtest6-sorted/merged"
 
 # Pattern for spontaneous background signal (from control sample only)
-control_sample="$path/feb-control_S18_L001.merged.fastq.gz"
+control_sample="$path/dec-OOF-1_S1_L001.merged.fastq.gz"
 spont=0
 if [[ -f "$control_sample" ]]; then
   spont=$(zgrep -io "gagcACGcttgTGATGGCAGA" "$control_sample" | wc -w)
 else
   echo "Control sample not found at: $control_sample"
-  exit 1
+  exit 
 fi
 
 echo "Background spontaneous signal (control): $spont"
