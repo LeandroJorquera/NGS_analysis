@@ -4,7 +4,7 @@
 # Merges paired-end FASTQ files using BBMerge (from BBTools)
 
 # Input and output directories -- HAVE FILES IN LOCAL, NOT CLOUD
-path='/Users/leandro/Desktop/github/NGS-data/RTtest5-sorted/raw'
+path='/Users/leandro/Desktop/github/NGS-data/SeV-ORF1_251003/raw'
 outdir="$path/merged"
 mkdir -p "$outdir"
 
