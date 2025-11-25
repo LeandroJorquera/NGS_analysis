@@ -1,0 +1,10 @@
+-e Sample	Total_Reads	Edited_Reads	Efficiency(%)
+-e dec-OOF-1_S1_L001.merged.fastq.gz	45868	       3	0
+-e RTtest6-c2_S9_L001.merged.fastq.gz	23108	     266	1.100
+-e RTtest6-c3_S10_L001.merged.fastq.gz	29192	     119	.300
+-e RTtest6-c4_S11_L001.merged.fastq.gz	18941	     100	.500
+-e RTtest6-c5_S12_L001.merged.fastq.gz	28881	     106	.300
+-e RTtest6-c6_S13_L001.merged.fastq.gz	26246	     128	.400
+-e RTtest6-c7_S14_L001.merged.fastq.gz	31795	     153	.400
+-e RTtest6-c8_S15_L001.merged.fastq.gz	31293	     164	.500
+-e RTtest6-c9_S16_L001.merged.fastq.gz	33509	     146	.400
