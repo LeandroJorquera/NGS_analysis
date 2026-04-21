@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Set the path to your FASTQ files (or use current dir)
+$path='/Users/leandro/Desktop/github/NGS-data/ORF2library1_260411/raw-data'
+
+# Move into the folder with the FASTQ files
+cd "$path" || { echo "Path not found!"; exit 1; }
+
+echo "Running FastQC on R1 and R2 FASTQ files..."
+
+# Create output directory for FastQC results
+mkdir -p fastqc_output
+
+# Run FastQC on both R1 and R2 files
+for fastq in *_R1_*.fastq.gz *_R2_*.fastq.gz; do
+    if [[ -f "$fastq" ]]; then
+        echo "Processing $fastq"
+        fastqc "$fastq" --outdir=fastqc_output
+    fi
+done
+
+# Move into the output directory
+cd fastqc_output || exit
+
+echo "Generating MultiQC report..."
+multiqc .
+
+# Optional: Clean up FASTQC zip/html files
+cleanup=true
+
+if [ "$cleanup" = true ]; then
+    echo "Cleaning up .zip and .html files..."
+    rm -f *.zip
+    rm -f ../*fastqc.html
+fi
+
+echo "✅ QC completed! MultiQC report is saved in: $PWD"
+
